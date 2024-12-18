@@ -1,0 +1,83 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Определение структуры Credit
+struct Credit {
+    string programName;   // Название кредитной программы
+    double interestRate;  // Процентная ставка по кредиту
+    int term;             // Срок предоставления кредита (в месяцах или годах)
+    double overpayment;   // Сумма переплаты
+};
+
+// Функция для ввода данных о кредитных программах
+void inputCredits(Credit credits[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ввод данных для кредитной программы " << i + 1 << ":\n";
+        cout << "Название кредитной программы: ";
+        cin.ignore();
+        getline(cin, credits[i].programName);
+
+        cout << "Процентная ставка (%): ";
+        cin >> credits[i].interestRate;
+
+        cout << "Срок предоставления кредита: ";
+        cin >> credits[i].term;
+
+        cout << "Сумма переплаты: ";
+        cin >> credits[i].overpayment;
+    }
+}
+
+// Функция для вывода данных о кредитных программах
+void printCredits(Credit credits[], int n) {
+    cout << "\nСписок кредитных программ:\n";
+    for (int i = 0; i < n; i++) {
+        cout << "Кредитная программа " << i + 1 << ":\n";
+        cout << "Название: " << credits[i].programName << endl;
+        cout << "Процентная ставка: " << credits[i].interestRate << "%\n";
+        cout << "Срок кредита: " << credits[i].term << " месяцев/лет\n";
+        cout << "Сумма переплаты: " << credits[i].overpayment << " руб.\n";
+        cout << "-------------------------------------\n";
+    }
+}
+
+// Функция сортировки по процентной ставке (пузырьковая сортировка)
+void sortCreditsByInterestRate(Credit credits[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (credits[j].interestRate > credits[j + 1].interestRate) {
+                // Обмен структур
+                Credit temp = credits[j];
+                credits[j] = credits[j + 1];
+                credits[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int n;
+
+    // Ввод количества кредитных программ
+    cout << "Введите количество кредитных программ: ";
+    cin >> n;
+
+    Credit credits[n]; // Объявление массива структур
+
+    // Ввод данных
+    inputCredits(credits, n);
+
+    // Вывод введенных данных
+    cout << "\nВведенные данные о кредитных программах:\n";
+    printCredits(credits, n);
+
+    // Сортировка по процентной ставке
+    sortCreditsByInterestRate(credits, n);
+
+    // Вывод отсортированных данных
+    cout << "\nКредитные программы, отсортированные по процентной ставке:\n";
+    printCredits(credits, n);
+
+    return 0;
+}

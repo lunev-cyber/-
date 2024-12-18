@@ -1,0 +1,28 @@
+def swap_quarters(matrix, M, N):
+    # Перебираем элементы левой верхней и правой нижней четвертей
+    for i in range(M // 2):
+        for j in range(N // 2):
+            # Меняем местами элементы
+            matrix[i][j], matrix[i + M // 2][j + N // 2] = matrix[i + M // 2][j + N // 2], matrix[i][j]
+
+# Ввод размеров матрицы
+M, N = map(int, input("Введите размеры матрицы (M и N - четные числа): ").split())
+
+# Проверка на четность
+if M % 2 != 0 or N % 2 != 0:
+    print("Ошибка: M и N должны быть четными числами.")
+else:
+    # Ввод матрицы
+    print("Введите элементы матрицы построчно:")
+    matrix = [list(map(int, input().split())) for _ in range(M)]
+
+    print("\nИсходная матрица:")
+    for row in matrix:
+        print(*row)
+
+    # Меняем четверти местами
+    swap_quarters(matrix, M, N)
+
+    print("\nМодифицированная матрица:")
+    for row in matrix:
+        print(*row)

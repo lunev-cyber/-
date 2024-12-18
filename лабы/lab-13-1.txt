@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <string.h>
+
+// Определение структуры Bicycle
+struct Bicycle {
+    char country[50];       // Страна производитель
+    int speeds;             // Количество скоростей
+    char type[50];          // Вид велосипеда
+    float price;            // Цена
+};
+
+// Функция для ввода данных о велосипедах
+void inputBicycles(struct Bicycle bikes[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("Ввод данных для велосипеда %d:\n", i + 1);
+        printf("Страна производитель: ");
+        scanf(" %[^\n]", bikes[i].country); // Чтение строки с пробелами
+        printf("Количество скоростей: ");
+        scanf("%d", &bikes[i].speeds);
+        printf("Вид велосипеда: ");
+        scanf(" %[^\n]", bikes[i].type);
+        printf("Цена: ");
+        scanf("%f", &bikes[i].price);
+    }
+}
+
+// Функция для вывода массива структур
+void printBicycles(struct Bicycle bikes[], int n) {
+    printf("\nСписок велосипедов:\n");
+    for (int i = 0; i < n; i++) {
+        printf("Велосипед %d:\n", i + 1);
+        printf("Страна производитель: %s\n", bikes[i].country);
+        printf("Количество скоростей: %d\n", bikes[i].speeds);
+        printf("Вид велосипеда: %s\n", bikes[i].type);
+        printf("Цена: %.2f руб.\n", bikes[i].price);
+        printf("-----------------------------\n");
+    }
+}
+
+// Функция сортировки массива структур по цене (пузырьковая сортировка)
+void sortBicyclesByPrice(struct Bicycle bikes[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (bikes[j].price > bikes[j + 1].price) {
+                // Обмен структур
+                struct Bicycle temp = bikes[j];
+                bikes[j] = bikes[j + 1];
+                bikes[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int n;
+
+    // Ввод количества велосипедов
+    printf("Введите количество велосипедов: ");
+    scanf("%d", &n);
+
+    struct Bicycle bikes[n]; // Объявляем массив структур
+
+    // Ввод данных
+    inputBicycles(bikes, n);
+
+    // Вывод введенных данных
+    printf("\nВведенные данные о велосипедах:\n");
+    printBicycles(bikes, n);
+
+    // Сортировка по цене
+    sortBicyclesByPrice(bikes, n);
+
+    // Вывод отсортированных данных
+    printf("\nВелосипеды, отсортированные по цене:\n");
+    printBicycles(bikes, n);
+
+    return 0;
+}

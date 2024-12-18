@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <limits.h> // Для использования INT_MAX и INT_MIN
+
+#define MAX_SIZE 100 // Максимальный размер матрицы
+
+// Функция для ввода матрицы
+void inputMatrix(int matrix[MAX_SIZE][MAX_SIZE], int m, int n) {
+    printf("Введите элементы матрицы (%d x %d):\n", m, n);
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+// Функция для нахождения минимального элемента в строке
+int findRowMin(int row[], int n) {
+    int min = INT_MAX; // Начальное значение для поиска минимума
+    for (int j = 0; j < n; j++) {
+        if (row[j] < min) {
+            min = row[j];
+        }
+    }
+    return min;
+}
+
+// Функция для нахождения максимального из минимальных элементов строк
+int findMaxAmongRowMins(int matrix[MAX_SIZE][MAX_SIZE], int m, int n) {
+    int maxOfMins = INT_MIN; // Начальное значение для максимального
+
+    for (int i = 0; i < m; i++) {
+        int rowMin = findRowMin(matrix[i], n); // Находим минимум в текущей строке
+        if (rowMin > maxOfMins) {
+            maxOfMins = rowMin; // Обновляем максимальное из минимумов
+        }
+    }
+    return maxOfMins;
+}
+
+int main() {
+    int m, n; // Размеры матрицы
+    int matrix[MAX_SIZE][MAX_SIZE]; // Объявление матрицы
+
+    // Ввод размеров матрицы
+    printf("Введите количество строк и столбцов матрицы: ");
+    scanf("%d %d", &m, &n);
+
+    // Проверка на корректные размеры
+    if (m <= 0 || n <= 0 || m > MAX_SIZE || n > MAX_SIZE) {
+        printf("Ошибка: некорректный размер матрицы.\n");
+        return 1;
+    }
+
+    // Ввод элементов матрицы
+    inputMatrix(matrix, m, n);
+
+    // Нахождение максимального среди минимальных элементов строк
+    int result = findMaxAmongRowMins(matrix, m, n);
+
+    // Вывод результата
+    printf("Максимальный среди минимальных элементов строк: %d\n", result);
+
+    return 0;
+}

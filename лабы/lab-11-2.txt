@@ -1,0 +1,45 @@
+def input_matrix():
+    """
+    Функция для ввода матрицы от пользователя.
+    :return: матрица (список списков) и ее размеры m, n
+    """
+    m, n = map(int, input("Введите количество строк и столбцов матрицы (m n): ").split())
+    print("Введите элементы матрицы построчно:")
+    matrix = [list(map(int, input().split())) for _ in range(m)]
+    return matrix, m, n
+
+def product_of_even_elements_in_column(matrix, m, n):
+    """
+    Находит произведение четных элементов для каждого столбца матрицы.
+    :param matrix: матрица
+    :param m: количество строк
+    :param n: количество столбцов
+    :return: список произведений для каждого столбца
+    """
+    results = []  # Список для хранения произведений четных элементов каждого столбца
+    for j in range(n):  # Проходим по каждому столбцу
+        product = 1
+        has_even = False  # Флаг для проверки наличия четных элементов
+        for i in range(m):  # Проходим по строкам текущего столбца
+            if matrix[i][j] % 2 == 0:  # Проверяем, является ли элемент четным
+                product *= matrix[i][j]
+                has_even = True
+        if not has_even:
+            product = 1  # Если четных элементов нет, произведение = 1
+        results.append(product)
+    return results
+
+def main():
+    # Ввод матрицы
+    matrix, m, n = input_matrix()
+
+    # Вычисление произведений четных элементов для каждого столбца
+    results = product_of_even_elements_in_column(matrix, m, n)
+
+    # Вывод результата
+    print("Произведение четных элементов для каждого столбца:")
+    for j, product in enumerate(results, start=1):
+        print(f"Столбец {j}: {product}")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    // Переменная для кода телефона
+    int phone_code;
+
+    // Ввод кода телефона
+    printf("Введите код телефона: ");
+    scanf("%d", &phone_code);
+
+    // Проверка кода и вывод названия оператора
+    if (phone_code == 903 || phone_code == 905 || phone_code == 906) {
+        printf("Оператор: Билайн\n");
+    } else if (phone_code == 925 || phone_code == 926) {
+        printf("Оператор: Мегафон\n");
+    } else if (phone_code == 916 || phone_code == 917) {
+        printf("Оператор: МТС\n");
+    } else if (phone_code == 929 || phone_code == 911) {
+        printf("Оператор: Tele2\n");
+    } else if (phone_code == 800 || phone_code == 801) {
+        printf("Оператор: Ростелеком\n");
+    } else {
+        printf("Неизвестный оператор\n");
+    }
+
+    return 0;
+}

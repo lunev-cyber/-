@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h> // Для работы со строками
+
+// Определение структуры Dictaphone
+struct Dictaphone {
+    char country[50];       // Страна производитель
+    int memorySize;         // Объем памяти (в мегабайтах или гигабайтах)
+    int recordingModes;     // Число режимов записи
+    float price;            // Цена диктофона
+};
+
+int main() {
+    struct Dictaphone d1; // Объявление переменной структуры
+
+    // Ввод данных для структуры
+    printf("Введите страну-производитель: ");
+    fgets(d1.country, sizeof(d1.country), stdin);
+    d1.country[strcspn(d1.country, "\n")] = '\0'; // Удаление символа новой строки
+
+    printf("Введите объем памяти (в МБ): ");
+    scanf("%d", &d1.memorySize);
+
+    printf("Введите число режимов записи: ");
+    scanf("%d", &d1.recordingModes);
+
+    printf("Введите цену: ");
+    scanf("%f", &d1.price);
+
+    // Вывод данных
+    printf("\nИнформация о диктофоне:\n");
+    printf("Страна-производитель: %s\n", d1.country);
+    printf("Объем памяти: %d МБ\n", d1.memorySize);
+    printf("Число режимов записи: %d\n", d1.recordingModes);
+    printf("Цена: %.2f руб.\n", d1.price);
+
+    return 0;
+}

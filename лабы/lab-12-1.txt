@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string> // Для использования строки std::string
+
+using namespace std;
+
+// Определение структуры Train
+struct Train {
+    string destination; // Название пункта назначения
+    int trainNumber;    // Номер поезда
+    string departureTime; // Время отправления (например, в формате "HH:MM")
+};
+
+int main() {
+    // Создаем переменную структуры Train
+    Train train1;
+
+    // Ввод данных для структуры
+    cout << "Введите название пункта назначения: ";
+    getline(cin, train1.destination);
+
+    cout << "Введите номер поезда: ";
+    cin >> train1.trainNumber;
+
+    cout << "Введите время отправления (HH:MM): ";
+    cin >> train1.departureTime;
+
+    // Вывод данных
+    cout << "\nИнформация о поезде:" << endl;
+    cout << "Пункт назначения: " << train1.destination << endl;
+    cout << "Номер поезда: " << train1.trainNumber << endl;
+    cout << "Время отправления: " << train1.departureTime << endl;
+
+    return 0;
+}
